@@ -17,7 +17,7 @@ namespace Library.Sorting
 		{
 			if (null == source)
 			{
-				throw new ArgumentNullException("source");
+				throw new ArgumentNullException(nameof(source));
 			}
 
 			return null;

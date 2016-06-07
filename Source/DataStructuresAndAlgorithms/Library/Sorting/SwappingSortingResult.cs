@@ -11,11 +11,11 @@ namespace Library.Sorting
 			Swaps = swaps;
 		}
 
-		public int Swaps { get; private set; }
+		public int Swaps { get; }
 
 		public override string ToString()
 		{
-			return string.Format("{0} and Swaps: {1:n0}", base.ToString(), Swaps);
+			return $"{base.ToString()} and Swaps: {Swaps:n0}";
 		}
 	}
 }

@@ -11,10 +11,7 @@ namespace Library.Sorting
 			{
 				Swap(ref left, ref right);
 
-				if (null != onSwap)
-				{
-					onSwap();
-				}
+				onSwap?.Invoke();
 			}
 		}
 
@@ -35,16 +32,15 @@ namespace Library.Sorting
 				case SortingDirection.Descending:
 					return res < 0;
 				default:
-					throw new ArgumentOutOfRangeException("sorting", sorting, null);
+					throw new ArgumentOutOfRangeException(nameof(sorting), sorting, null);
 			}
 		}
 
 		public static void Swap<T>(ref T left, ref T right)
 			where T : struct, IComparable<T>
 		{
-			var tmp = default(T);
+			var tmp = left;
 
-			tmp = left;
 			left = right;
 			right = tmp;
 		}

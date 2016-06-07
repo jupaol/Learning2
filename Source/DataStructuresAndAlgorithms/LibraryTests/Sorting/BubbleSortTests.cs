@@ -40,7 +40,7 @@ namespace LibraryTests.Sorting
 			public void it_should_return_same_array_sorted_ascending()
 			{
 				int[] res;
-				int[] source = new int[G.Source.Length];
+				var source = new int[G.Source.Length];
 
 				Array.Copy(G.Source, source, G.Source.Length);
 
@@ -85,7 +85,7 @@ namespace LibraryTests.Sorting
 			public void it_should_return_same_array_sorted_ascending()
 			{
 				int[] res;
-				int[] source = new int[G.Source.Length];
+				var source = new int[G.Source.Length];
 
 				Array.Copy(G.Source, source, G.Source.Length);
 
@@ -130,7 +130,7 @@ namespace LibraryTests.Sorting
 			public void it_should_return_same_array_sorted_ascending()
 			{
 				int[] res;
-				int[] source = new int[G.Source.Length];
+				var source = new int[G.Source.Length];
 
 				Array.Copy(G.Source, source, G.Source.Length);
 
@@ -175,7 +175,7 @@ namespace LibraryTests.Sorting
 			public void it_should_return_same_array_sorted_ascending()
 			{
 				int[] res;
-				int[] source = new int[G.Source.Length];
+				var source = new int[G.Source.Length];
 
 				Array.Copy(G.Source, source, G.Source.Length);
 

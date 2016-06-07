@@ -9,20 +9,20 @@ namespace Library.Sorting
 		{
 			if (res == null)
 			{
-				throw new ArgumentNullException("res");
+				throw new ArgumentNullException(nameof(res));
 			}
 
 			Res = res;
 			Iterations = iterations;
 		}
 
-		public T[] Res { get; private set; }
+		public T[] Res { get; }
 
-		public int Iterations { get; private set; }
+		public int Iterations { get; }
 
 		public override string ToString()
 		{
-			return string.Format("Sorting: {0:n0} elements took {1:n0} iterations", Res.Length, Iterations);
+			return $"Sorting: {Res.Length:n0} elements took {Iterations:n0} iterations";
 		}
 	}
 }

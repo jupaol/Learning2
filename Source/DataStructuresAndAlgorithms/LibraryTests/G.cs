@@ -14,7 +14,7 @@ namespace LibraryTests
 			Expected = Source.OrderBy(x => x).ToArray();
 		}
 
-		public static int[] Source { get; private set; }
+		public static int[] Source { get; }
 
 		public static int[] Expected { get; private set; }
 
@@ -22,7 +22,7 @@ namespace LibraryTests
 		{
 			if (max <= 0)
 			{
-				throw new ArgumentException("Max should be grather than 0", "max");
+				throw new ArgumentException("Max should be grather than 0", nameof(max));
 			}
 
 			var list = new List<int>();
