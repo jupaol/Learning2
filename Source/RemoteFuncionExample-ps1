@@ -1,0 +1,87 @@
+$ErrorActionPreference = 'Stop'
+$VerbosePreference = 'Continue'
+
+
+try
+{
+    function Export-FunctionRemote
+    {
+            <#
+            .SYNOPSIS
+            Exports function to String ScriptBlock
+
+            .PARAMETER functionName
+            this is object type data coming via pipeline
+    
+            .DESCRIPTION
+            This cmdlet compares generic property names and values and return data if they match parameters passed. 
+            Be aware that it lowers the characters for being compliant with all remaining functions
+        
+            .EXAMPLE
+            $mtFunction = Export-FunctionRemote
+        #>
+
+
+        param
+        (
+            $name
+        )
+
+        $function = $(Get-Content function:\$name)
+
+        $result = "Function $name {"
+        $result += $function
+        $result += '}'
+
+        return $result
+    }
+
+    function Foo
+    {
+        param
+        (
+            [Parameter(Position = 0)]
+            $a
+        )
+
+        #Write-Verbose "$a $(([System.Net.Dns]::GetHostByName(($env:computerName))))"
+        Write-Verbose "$([System.Net.Dns]::GetHostByName(($env:computerName)).HostName)"
+    }
+
+    [string]$fooInternal2 = Export-FunctionRemote Foo
+
+    Write-Verbose $fooInternal2
+
+    $ComputerName = "Win2012JPTest1"
+
+    [ValidateNotNull()]$session = New-PSSession -ComputerName $ComputerName
+
+    Invoke-Command -Session $session -ArgumentList "Hello from: ", $fooInternal2 -ScriptBlock `
+    {
+        param
+        (
+            [Parameter(Position = 0)]
+            $b,
+
+            [Parameter(Position = 1)]
+            $fooInternal
+        )
+
+		$ErrorActionPreference = 'Stop'
+		$VerbosePreference = 'Continue'
+
+        . ([ScriptBlock]::Create($fooInternal))
+
+        foo($b)
+
+
+        Write-Verbose "Done $b"
+    }
+}
+finally
+{
+    if ($session)
+    {
+        Remove-PSSession -Session $session
+    }
+}
